@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Your Page Title</title>
+    <!-- Additional meta tags, stylesheets, or scripts can be added here -->
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/normalizer.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700&display=swap" />
+  </head>
+  <body>
+    <header>
+      <img class="headerImg" src="img/headerPic.png" />
+      <h1><img class="logoImg" src="img/Logo.svg" /></h1>
+      <h2>CHERCHEZ PARMI PLUS DE 1500 RECETTES DU QUOTIDIEN,SIMPLES ET DÉLICIEUSES</h2>
+      <form action="/submit" method="post">
+        <input type="text" placeholder="Rechercher une recette, un ingrédient, ..." class="inputMain" required />
+        <input type="image" class="loopInput" src="img/Loop.svg" alt="Submit" />
+      </form>
+    </header>
+    <main>
+      <div class="flexDiv">
+        <div class="secondFlexDiv">
+          <div class="dropdownIng"  id="ingDropdownContainer">
+            <div class="dropdownIngBase dropdownFlex" id="ingDropdownToggle">
+              <div>Ingrédients</div><svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <div class="dropdownIngInput dropdownIngContent">
+              <input type="text" class="ingInput" />
+              <svg class="inpputLoop" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="5" cy="5" r="4.75" stroke="#7A7A7A" stroke-width="0.5"/>
+                <line x1="9.17678" y1="9.32322" x2="13.6768" y2="13.8232" stroke="#7A7A7A" stroke-width="0.5"/>
+                </svg>
+                <div class="listIngredient"></div>                
+            </div>
+          </div>
+          <div class="dropdownUst"  id="ustDropdownContainer">
+            <div class="dropdownUstBase dropdownFlex" id="ustDropdownToggle">
+              <div>Ustensils</div><svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <div class="dropdownUstInput dropdownUstContent">
+              <input type="text" class="ustInput" />
+              <svg class="inpputLoop" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="5" cy="5" r="4.75" stroke="#7A7A7A" stroke-width="0.5"/>
+                <line x1="9.17678" y1="9.32322" x2="13.6768" y2="13.8232" stroke="#7A7A7A" stroke-width="0.5"/>
+                </svg>
+                <div class="listUst"></div>                
+            </div>
+          </div>
+          <div class="dropdownAppliance"  id="appDropdownContainer">
+            <div class="dropdownAppgBase dropdownFlex" id="appDropdownToggle">
+              <div>Appliance</div><svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <div class="dropdownAppInput dropdownAppContent">
+              <input type="text" class="appInput" />
+              <svg class="inpputLoop" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="5" cy="5" r="4.75" stroke="#7A7A7A" stroke-width="0.5"/>
+                <line x1="9.17678" y1="9.32322" x2="13.6768" y2="13.8232" stroke="#7A7A7A" stroke-width="0.5"/>
+                </svg>
+                <div class="listApp"></div>                
+            </div>
+          </div>
+        </div>
+        <div class="recette">recettes</div>
+      </div>
+      <div class="listTag"></div>
+      <div class="mainCardFlex"></div>
+    </main>
+    <script type="module" src="recipes.js"></script>
+    <!--<script type="module" src="nat.js"></script>
+    <script type="module" src="Search.js"></script>-->
+     <script type="module" src="factory.js"></script>
+  </body>
+</html>

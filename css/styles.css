@@ -1,0 +1,286 @@
+.headerImg {
+  width: 1440px;
+  height: 668px;
+}
+
+.logoImg {
+  position: absolute;
+  left: 416px;
+  width: 212px;
+  top: 50px;
+}
+
+h2 {
+  color: var(--Yellow, #ffd15b);
+  text-align: center;
+  font-family: Anton;
+  font-size: 44px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  top: 210px;
+  position: absolute;
+  width: 33%;
+  left: 713px;
+}
+
+form {
+  position: absolute;
+  top: 404px;
+  left: 589px;
+}
+
+.inputMain {
+  width: 951px;
+  height: 72px;
+  border-radius: 11px;
+  color: var(--Grey, #7a7a7a);
+  font-family: Manrope;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.loopInput {
+  position: absolute;
+  top: 14%;
+  right: 1.3%;
+}
+
+main {
+  background: #ededed;
+}
+
+.flexDiv {
+  display: flex;
+  justify-content: space-between;
+}
+
+.secondFlexDiv {
+  margin-left: 7%;
+  gap: 77px;
+  display: flex;
+}
+
+.dropdownFlex{
+  display: flex;
+  justify-content: space-between;
+  border-radius: 11px;
+  background: #fff;
+  padding: 17px 16px;
+  width: 182px;
+}
+
+.dropdownIngInput{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.ingInput{
+  width: 207px;
+  height: 36px;
+}
+
+ul{
+  list-style-type: none;
+  padding-left: unset;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 195px;
+}
+
+
+.dropdownIngContent  {
+  display: none;
+}
+
+.listIngredient{
+  height: 200px;
+  overflow: auto;
+  z-index: 1;
+  position: fixed;
+
+  background-color: white;
+}
+
+.listUst{
+  height: 200px;
+  overflow: auto;
+  z-index: 1;
+  position: fixed;
+
+  background-color: white;
+}
+
+.listApp{
+  height: 200px;
+  overflow: auto;
+  z-index: 1;
+  position: fixed;
+
+  background-color: white;
+}
+
+.labelSearch{
+  width: 203px;
+  height: 33px;
+  border-radius: 10px;
+  background-color: #FFD15B;
+  text-align: center;
+  padding-top: 20px;
+  font-family: Manrope;
+font-size: 14px;
+font-weight: 400;
+}
+
+.listTag{
+  display: flex;
+  justify-content: flex-start;
+  gap: 34px;
+  padding-left: 7%;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+
+li{
+  font-family: Manrope;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 19px;
+  padding-top: 7px;
+}
+
+.inpputLoop{
+  position: absolute;
+  top: 15px;
+  right: 34px;
+}
+
+/*ust*/
+
+.dropdownUstInput{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.dropdownUstContent {
+  display: none;
+}
+.ustInput{
+  width: 207px;
+  height: 36px;
+}
+
+/*app*/
+
+.dropdownAppInput{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.appInput{
+  width: 207px;
+  height: 36px;
+}
+
+.dropdownAppContent  {
+  display: none;
+}
+.mainCardFlex{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.mainCard {
+  width: 380px;
+  border-radius: 21px;
+  background: #fff;
+  box-shadow: 0px 4px 34px 30px rgba(0, 0, 0, 0.04);
+  margin-top: 52px;
+}
+
+.mainCardImage {
+  object-fit: cover;
+  width: 380px;
+  height: 253px;
+}
+
+.mainCardTitle {
+  color: #000;
+  font-family: Anton;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 27px;
+  margin-left: 26px;
+}
+
+.mainCardSecondTitle {
+  color: var(--Grey, #7a7a7a);
+  font-family: Manrope;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1.08px;
+  text-transform: uppercase;
+  margin-top: 29px;
+  margin-left: 25px;
+}
+
+.mainCardText {
+  color: var(--Black, #1b1b1b);
+  font-family: Manrope;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  width: 330px;
+  margin-left: 26px;
+}
+
+.mainCardThirtTitle{
+    color: var(--Grey, #7A7A7A);
+font-family: Manrope;
+font-size: 12px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+letter-spacing: 1.08px;
+text-transform: uppercase;
+margin-left: 25px;
+margin-top: 27px;
+}
+
+.mainCardStuffFlex{
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 25px;
+}
+
+.mainCardStuff{
+  width: 50%;
+}
+
+.mainCardStuff > h6{
+  margin-top: 21px;
+  margin-bottom: unset;
+}
+
+.mainCardStuff > p{
+  margin-top: unset;
+  margin-bottom: unset;
+}
