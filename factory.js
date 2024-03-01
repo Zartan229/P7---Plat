@@ -1,10 +1,10 @@
 import recipes from "./recipes.js";
-//import Search from "./Search.js";
-// Initialize tag array
-const tag = [];
+import { tag, displayTags } from './tags.js';
+import { createRecipeCard } from './recipeCard.js';
 const mainCardFlex = document.querySelector(".mainCardFlex");
 let recipesDisplayed = 0;
 let filteredRecipes = [];
+/*
 // Factory function to create recipe cards
 function createRecipeCard(recipe) {
   const mainCard = document.createElement("div");
@@ -53,7 +53,7 @@ function createRecipeCard(recipe) {
 
   return mainCard;
 }
-
+*/
 // Function to display unique ingredients in the listIngredient div
 function displayIngredients(filteredRecipes) {
   const listIngredient = document.querySelector(".listIngredient");
@@ -119,8 +119,18 @@ function filterIngredients(searchTerm, filteredRecipes) {
   uniqueIngredients.forEach((ingredient) => {
     const liElement = document.createElement("li");
     liElement.textContent = ingredient;
+    
+    // Add a click event listener to each filtered ingredient
+    liElement.addEventListener('click', function () {
+      // When a filtered ingredient is clicked, add it to the tag array
+      tag.push(ingredient);
+      console.log("Tags:", tag); // Log tags for testing
+      displayTags();
+    });
+
     ulElement.appendChild(liElement);
   });
+  
 
   listIngredient.innerHTML = "";
   listIngredient.appendChild(ulElement);
@@ -188,14 +198,14 @@ function displayUstensils(filteredRecipes) {
   // Convert Set to array and sort alphabetically
   const sortedUstensils = [...uniqueUstensils].sort();
 
-  // Display ustensils in listUst div as list items
-  sortedUstensils.forEach((utensil) => {
+    // Display filtered ustensils in listUst div as list items
+  uniqueUstensils.forEach((utensil) => {
     const liElement = document.createElement("li");
     liElement.textContent = utensil;
-
-    // Add a click event listener to each li element
+    
+    // Add a click event listener to each filtered utensil
     liElement.addEventListener('click', function () {
-      // When an li is clicked, add its content to the tag array
+      // When a filtered utensil is clicked, add it to the tag array
       tag.push(utensil);
       console.log("Tags:", tag); // Log tags for testing
       displayTags();
@@ -230,6 +240,15 @@ function filterUstensils(searchTerm, filteredRecipes) {
   uniqueUstensils.forEach((utensil) => {
     const liElement = document.createElement("li");
     liElement.textContent = utensil;
+    
+    // Add a click event listener to each filtered utensil
+    liElement.addEventListener('click', function () {
+      // When a filtered utensil is clicked, add it to the tag array
+      tag.push(utensil);
+      console.log("Tags:", tag); // Log tags for testing
+      displayTags();
+    });
+
     ulElement.appendChild(liElement);
   });
 
@@ -309,12 +328,21 @@ function filterAppliances(searchTerm, filteredRecipes) {
     }
   });
 
-  // Display filtered appliances in listApp div as list items
-  uniqueAppliances.forEach((appliance) => {
-    const liElement = document.createElement("li");
-    liElement.textContent = appliance;
-    ulElement.appendChild(liElement);
-  });
+    // Display filtered appliances in listApp div as list items
+    uniqueAppliances.forEach((appliance) => {
+      const liElement = document.createElement("li");
+      liElement.textContent = appliance;
+      
+      // Add a click event listener to each filtered appliance
+      liElement.addEventListener('click', function () {
+        // When a filtered appliance is clicked, add it to the tag array
+        tag.push(appliance);
+        console.log("Tags:", tag); // Log tags for testing
+        displayTags();
+      });
+  
+      ulElement.appendChild(liElement);
+    });
 
   listApp.innerHTML = "";
   listApp.appendChild(ulElement);
@@ -343,9 +371,12 @@ async function displayRecipes() {
 
     inputMain.addEventListener("input", function () {
       const searchTerm = inputMain.value.toLowerCase();
-      // Check if the input length is at least three characters before performing the search
       if (searchTerm.length >= 3) {
+        // Update recipes when the search term has at least three characters
         updateRecipes(searchTerm);
+      } else {
+        // If the search term has less than three characters, display all recipes
+        updateRecipes("");
       }
     });
 
@@ -369,7 +400,7 @@ async function displayRecipes() {
     console.error("Error fetching or displaying recipes:", error);
   }
 }
-
+/*
 function displayTags() {
   const listTag = document.querySelector(".listTag");
 
@@ -403,7 +434,7 @@ function displayTags() {
   // Call updateRecipes without searchTerm to refresh recipes based on tags
   updateRecipes();
 }
-
+*/
 // Function to update recipes based on search term and selected tags
 function updateRecipes(searchTerm = "") {
   // Reset recipesDisplayed when updating recipes
@@ -413,7 +444,7 @@ function updateRecipes(searchTerm = "") {
 
   filteredRecipes = recipes.filter((recipe) => {
     const hasSearchTerm = (
-      !searchTerm ||
+      searchTerm.length < 3 || // Display all recipes if the search term has less than three characters
       recipe.name.toLowerCase().includes(searchTerm) ||
       recipe.description.toLowerCase().includes(searchTerm) ||
       recipe.ingredients.some((ingredient) => ingredient.ingredient.toLowerCase().includes(searchTerm))
@@ -453,5 +484,8 @@ function updateRecipes(searchTerm = "") {
   displayAppliances(filteredRecipes);
 }
 
+
+
 // Call the function to display recipes
 displayRecipes();
+export { updateRecipes };
