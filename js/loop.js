@@ -1,10 +1,38 @@
 import recipes from "./recipes.js";
 import { tag } from './tags.js';
 import { createRecipeCard } from './recipeCard.js';
-import { displayIngredients, displayUstensils, displayAppliances } from './front.js';
+import { displayIngredients, displayUstensils, displayAppliances, filterIngredients, filterUstensils, filterAppliances } from './front.js';
 const mainCardFlex = document.querySelector(".mainCardFlex");
 let recipesDisplayed = 0;
 let filteredRecipes = [];
+
+
+
+ // Event listener for input changes
+ const ingInput = document.querySelector(".ingInput");
+  
+ // Update the event listeners to pass the filtered recipes
+ ingInput.addEventListener("input", function () {
+   const searchTerm = ingInput.value.toLowerCase();
+   filterIngredients(searchTerm, filteredRecipes);
+ });
+
+
+   // Event listener for utensil input changes
+   const ustInput = document.querySelector(".ustInput");
+  
+   ustInput.addEventListener("input", function () {
+     const searchTerm = ustInput.value.toLowerCase();
+     filterUstensils(searchTerm, filteredRecipes);
+   });
+
+     // Event listener for appliance input changes
+  const appInput = document.querySelector(".appInput");
+  
+  appInput.addEventListener("input", function () {
+    const searchTerm = appInput.value.toLowerCase();
+    filterAppliances(searchTerm, filteredRecipes);
+  });
 
 // Function to update recipes based on search term and selected tags
 function updateRecipes(searchTerm = "") {

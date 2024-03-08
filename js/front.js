@@ -1,5 +1,6 @@
 import { updateRecipes } from './loop.js';
 import { tag, displayTags } from './tags.js';
+
 // Function to display unique ingredients in the listIngredient div
 function displayIngredients(filteredRecipes) {
     const listIngredient = document.querySelector(".listIngredient");
@@ -81,16 +82,7 @@ function displayIngredients(filteredRecipes) {
     listIngredient.innerHTML = "";
     listIngredient.appendChild(ulElement);
   }
-  
-  // Event listener for input changes
-  const ingInput = document.querySelector(".ingInput");
-  
-  // Update the event listeners to pass the filtered recipes
-  ingInput.addEventListener("input", function () {
-    const searchTerm = ingInput.value.toLowerCase();
-    filterIngredients(searchTerm, filteredRecipes);
-  });
-  
+    
   // Call the function to initially display all ingredients and store sortedIngredients
   //const sortedIngredients = displayIngredients();
   
@@ -202,14 +194,6 @@ function displayIngredients(filteredRecipes) {
     listUst.appendChild(ulElement);
   }
   
-  // Event listener for utensil input changes
-  const ustInput = document.querySelector(".ustInput");
-  
-  ustInput.addEventListener("input", function () {
-    const searchTerm = ustInput.value.toLowerCase();
-    filterUstensils(searchTerm, filteredRecipes);
-  });
-  
   // Call the function to initially display all ustensils and store sortedUstensils
   //const sortedUstensils = displayUstensils();
   
@@ -293,16 +277,6 @@ function displayIngredients(filteredRecipes) {
     listApp.innerHTML = "";
     listApp.appendChild(ulElement);
   }
-  
-  
-  // Event listener for appliance input changes
-  const appInput = document.querySelector(".appInput");
-  
-  appInput.addEventListener("input", function () {
-    const searchTerm = appInput.value.toLowerCase();
-    filterAppliances(searchTerm, filteredRecipes);
-  });
-  
 
 document.addEventListener("DOMContentLoaded", function() {
     const inputMain = document.querySelector('.inputMain');
@@ -362,4 +336,4 @@ async function displayRecipes() {
 
 displayRecipes();
 
-export { displayIngredients, displayUstensils, displayAppliances };
+export { displayIngredients, displayUstensils, displayAppliances, filterIngredients, filterUstensils, filterAppliances };
