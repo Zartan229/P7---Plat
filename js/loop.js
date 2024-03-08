@@ -4,6 +4,25 @@ import { createRecipeCard } from './recipeCard.js';
 const mainCardFlex = document.querySelector(".mainCardFlex");
 let recipesDisplayed = 0;
 let filteredRecipes = [];
+
+document.addEventListener("DOMContentLoaded", function() {
+  const inputMain = document.querySelector('.inputMain');
+  const deleteIcon = document.querySelector('.deleteInput');
+
+  inputMain.addEventListener('input', function() {
+      if (this.value.length > 0) {
+          deleteIcon.style.display = 'block';
+      } else {
+          deleteIcon.style.display = 'none';
+      }
+  });
+
+  deleteIcon.addEventListener('click', function() {
+      inputMain.value = '';
+      deleteIcon.style.display = 'none';
+  });
+});
+
 /*
 // Factory function to create recipe cards
 function createRecipeCard(recipe) {

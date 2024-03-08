@@ -52,6 +52,12 @@ form {
   margin-left: -69px;
 }
 
+.deleteInput{
+  margin-left: -80px;
+  display: none;
+  cursor: pointer;
+}
+
 main {
   background: #ededed;
   margin-top: 149px;
@@ -78,6 +84,7 @@ main {
   background: #fff;
   padding: 17px 16px;
   width: 182px;
+  cursor: pointer;
 }
 
 .dropdownIngInput{
@@ -101,6 +108,7 @@ ul{
   align-items: flex-start;
   width: 212px;
   overflow: hidden;
+  cursor: pointer;
 }
 
 
