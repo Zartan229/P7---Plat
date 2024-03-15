@@ -3,6 +3,7 @@ import { tag } from './tags.js';
 import { createRecipeCard } from './recipeCard.js';
 import { displayIngredients, displayUstensils, displayAppliances, filterIngredients, filterUstensils, filterAppliances } from './front.js';
 const mainCardFlex = document.querySelector(".mainCardFlex");
+const inputMain = document.querySelector('.inputMain');
 let recipesDisplayed = 0;
 let filteredRecipes = [];
 
@@ -40,6 +41,13 @@ function updateRecipes(searchTerm = "") {
   recipesDisplayed = 0;
 
   const selectedTags = tag ? tag.map((tag) => tag.toLowerCase()) : [];
+  let searchTermInput = inputMain.value.trim().toLowerCase();
+
+  // Check if the inputMain content has three or more characters
+  if (searchTermInput.length >= 3) {
+
+    searchTerm = searchTermInput; // Use the content of inputMain as the searchTerm
+  }
 
   filteredRecipes = recipes.filter((recipe) => {
     const hasSearchTerm = (
@@ -82,6 +90,7 @@ function updateRecipes(searchTerm = "") {
   displayUstensils(filteredRecipes);
   displayAppliances(filteredRecipes);
 }
+
 
 
 
