@@ -1,4 +1,4 @@
-import { updateRecipes } from './loop.js';
+import { updateRecipes } from './BoucleNatif.js';
 import { tag, displayTags } from './tags.js';
 
 // Function to display unique ingredients in the listIngredient div

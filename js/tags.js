@@ -1,5 +1,5 @@
 // In another JS file where updateRecipes() is needed
-import { updateRecipes } from './loop.js';
+import { updateRecipes } from './BoucleNatif.js';
 
 const tag = [];
 
