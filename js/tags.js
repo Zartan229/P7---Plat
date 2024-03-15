@@ -14,7 +14,12 @@ function displayTags() {
       const tagElement = document.createElement("div");
       tagElement.className = "labelSearch";
       tagElement.textContent = tagItem;
-  
+
+      const crossElement = document.createElement("img");
+      crossElement.className = "labelClose";
+      crossElement.src = '../img/cross.svg'
+      
+      tagElement.appendChild(crossElement);
       // Add a click event listener to each tag element
       tagElement.addEventListener('click', function () {
         // Remove the clicked tag from the tag array

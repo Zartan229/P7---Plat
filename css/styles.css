@@ -159,6 +159,12 @@ ul{
   font-family: Manrope;
 font-size: 14px;
 font-weight: 400;
+display: flex;
+justify-content: space-around;
+}
+
+.labelSearch:hover{
+  font-weight: bold;
 }
 
 .listTag{
@@ -169,6 +175,19 @@ font-weight: 400;
   flex-wrap: wrap;
   margin-top: 25px;
 }
+
+.labelClose{
+  width: 17px;
+  height: 17px;
+}
+
+.labelClose:hover{
+  width: 17px;
+  height: 17px;
+  border-radius: 10px;
+  background-color: black;
+}
+
 
 li{
   font-family: Manrope;
