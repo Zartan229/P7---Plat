@@ -306,7 +306,7 @@ async function displayRecipes() {
         const searchTerm = inputMain.value.toLowerCase();
         if (searchTerm.length >= 3) {
           // Update recipes when the search term has at least three characters
-          updateRecipes(searchTerm);
+          updateRecipes(nettoyageInput(searchTerm));
         } else {
           // If the search term has less than three characters, display all recipes
           updateRecipes("");
@@ -333,6 +333,18 @@ async function displayRecipes() {
       console.error("Error fetching or displaying recipes:", error);
     }
   }
+
+
+  function nettoyageInput(input) {
+    // Test pour des tags HTML
+    if (/<.*?>/.test(input)) {
+      alert("Du code HTML a été détecter, annulation de la recherche.");
+      const inputMain = document.querySelector(".inputMain");
+      inputMain.value = "";
+      return "";
+  }
+  return input;
+}
 
 displayRecipes();
 
