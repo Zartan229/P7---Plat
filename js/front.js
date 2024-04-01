@@ -279,6 +279,7 @@ document.addEventListener("DOMContentLoaded", function() {
     deleteIcon.addEventListener('click', function() {
         inputMain.value = '';
         deleteIcon.style.display = 'none';
+        updateRecipes("")
     });
   });
 
