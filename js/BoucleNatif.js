@@ -8,17 +8,17 @@ const inputMain = document.querySelector('.inputMain');
 let recipesDisplayed = 0;
 let filteredRecipes = [];
 
- // Event listener for input changes
+ // Écouteur d'événements pour les changements de saisie
  const ingInput = document.querySelector(".ingInput");
   
- // Update the event listeners to pass the filtered recipes
+ // Mettre à jour les écouteurs d'événements pour passer les recettes filtrées
  ingInput.addEventListener("input", function () {
    const searchTerm = ingInput.value.toLowerCase();
    filterIngredients(searchTerm, filteredRecipes);
  });
 
 
-   // Event listener for utensil input changes
+   // Écouteur d'événements pour les changements de saisie des ustensiles
    const ustInput = document.querySelector(".ustInput");
   
    ustInput.addEventListener("input", function () {
@@ -26,7 +26,7 @@ let filteredRecipes = [];
      filterUstensils(searchTerm, filteredRecipes);
    });
 
-     // Event listener for appliance input changes
+     // Écouteur d'événements pour les changements de saisie des appareils
   const appInput = document.querySelector(".appInput");
   
   appInput.addEventListener("input", function () {
@@ -34,17 +34,18 @@ let filteredRecipes = [];
     filterAppliances(searchTerm, filteredRecipes);
   });
 
-  // Function to update recipes based on search term and selected tags
+
+  // Fonction pour mettre à jour les recettes en fonction du terme de recherche et des balises sélectionnées
 function updateRecipes(searchTerm = "") {
-    // Reset recipesDisplayed when updating recipes
+    // Réinitialiser recipesDisplayed lors de la mise à jour des recettes
     recipesDisplayed = 0;
   
     const selectedTags = tag ? tag.map((tag) => tag.toLowerCase()) : [];
     let searchTermInput = inputMain.value.trim().toLowerCase();
   
-    // Check if the inputMain content has three or more characters
+     // Vérifie si le contenu de inputMain comporte trois caractères ou plus
     if (searchTermInput.length >= 3) {
-      searchTerm = searchTermInput; // Use the content of inputMain as the searchTerm
+      searchTerm = searchTermInput; // Utilise le contenu de inputMain comme searchTerm
     }
   
     filteredRecipes = [];
@@ -52,12 +53,11 @@ function updateRecipes(searchTerm = "") {
       const recipe = recipes[i];
   
       const hasSearchTerm = (
-        searchTerm.length < 3 ||
         recipe.name.toLowerCase().includes(searchTerm) ||
         recipe.description.toLowerCase().includes(searchTerm) ||
         recipe.ingredients.some((ingredient) => ingredient.ingredient.toLowerCase().includes(searchTerm))
       );
-  
+  // Vérifie si tout les tags sélectionnées sont présentes dans la recette
       const hasAllSelectedTags = selectedTags.every(tag => 
         recipe.ingredients.some((ingredient) => ingredient.ingredient.toLowerCase() === tag) ||
         recipe.ustensils.some((utensil) => utensil.toLowerCase() === tag) ||
@@ -74,7 +74,7 @@ function updateRecipes(searchTerm = "") {
       return;
     }
   
-    mainCardFlex.innerHTML = ""; // Clear existing recipes
+    mainCardFlex.innerHTML = ""; // Supprime les recettes
   
     for (let i = 0; i < filteredRecipes.length; i++) {
       const recipe = filteredRecipes[i];
@@ -94,5 +94,5 @@ function updateRecipes(searchTerm = "") {
     displayAppliances(filteredRecipes);
   }
   
-  // Call the function to display recipes
+ // Appelle la fonction pour afficher les recettes
   export { updateRecipes };
