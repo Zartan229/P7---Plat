@@ -71,7 +71,7 @@ function updateRecipes(searchTerm = "") {
     return;
   }
 
-  mainCardFlex.innerHTML = ""; // Clear existing recipes
+  mainCardFlex.innerHTML = ""; // Supprime les recettes existante
 
   filteredRecipes.forEach((recipe) => {
     const card = createRecipeCard(recipe);
