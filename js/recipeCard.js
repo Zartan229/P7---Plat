@@ -1,9 +1,8 @@
-// recipeCard.js
 export function createRecipeCard(recipe) {
     const mainCard = document.createElement("div");
     mainCard.className = "mainCard";
 
-    // Helper function to create an element
+    // Fonction d'aide pour créer un élément
     function createElement(tag, className, textContent) {
         const element = document.createElement(tag);
         element.className = className;
@@ -11,21 +10,21 @@ export function createRecipeCard(recipe) {
         return element;
     }
 
-    // Create and append image element
+    // Créer et ajouter l'élément image
     mainCard.appendChild(createElement("img", "mainCardImage")).src = "asset/" + recipe.image;
 
-    // Create and append title element
+    // Créer et ajouter l'élément titre
     mainCard.appendChild(createElement("h3", "mainCardTitle", recipe.name));
 
-    // Create and append description element
+    // Créer et ajouter l'élément description
     mainCard.appendChild(createElement("p", "mainCardText", recipe.description));
 
-    // Create and append ingredients section
+    // Créer la section des ingrédients
     const ingredientsSection = document.createElement("div");
     ingredientsSection.className = "mainCardStuffFlex";
     mainCard.appendChild(ingredientsSection);
 
-    // Iterate through ingredients and create elements
+    // Itérer à travers les ingrédients et créer des éléments
     recipe.ingredients.forEach((ingredient) => {
         const ingredientElement = document.createElement("div");
         ingredientElement.className = "mainCardStuff";

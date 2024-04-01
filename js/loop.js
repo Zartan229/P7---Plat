@@ -51,7 +51,6 @@ function updateRecipes(searchTerm = "") {
 
   filteredRecipes = recipes.filter((recipe) => {
     const hasSearchTerm = (
-      searchTerm.length < 3 || // Display all recipes if the search term has less than three characters
       recipe.name.toLowerCase().includes(searchTerm) ||
       recipe.description.toLowerCase().includes(searchTerm) ||
       recipe.ingredients.some((ingredient) => ingredient.ingredient.toLowerCase().includes(searchTerm))

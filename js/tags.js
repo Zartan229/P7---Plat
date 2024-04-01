@@ -1,4 +1,3 @@
-// In another JS file where updateRecipes() is needed
 import { updateRecipes } from './loop.js';
 
 const tag = [];
@@ -6,10 +5,10 @@ const tag = [];
 function displayTags() {
     const listTag = document.querySelector(".listTag");
   
-    // Clear existing tags
+    // Effacer les balises existantes
     listTag.innerHTML = "";
   
-    // Iterate through tags and create div elements
+    // Itérer à travers les tags et créer des éléments div
     tag.forEach((tagItem) => {
       const tagElement = document.createElement("div");
       tagElement.className = "labelSearch";
@@ -20,25 +19,22 @@ function displayTags() {
       crossElement.src = '../img/cross.svg'
       
       tagElement.appendChild(crossElement);
-      // Add a click event listener to each tag element
+      // Ajouter un écouteur d'événements de clic à chaque élément de tag
       tagElement.addEventListener('click', function () {
-        // Remove the clicked tag from the tag array
+        // Supprimer le tag cliquée du tableau des tags
         const index = tag.indexOf(tagItem);
         if (index !== -1) {
           tag.splice(index, 1);
-          // Display updated tags
+          // Afficher les tags mises à jour
           displayTags();
-          // Log tags for testing
-          console.log("Tags:", tag);
-          // Update recipes
-          updateRecipes(); // Call updateRecipes without searchTerm
+          updateRecipes(); 
         }
       });
   
       listTag.appendChild(tagElement);
     });
   
-    // Call updateRecipes without searchTerm to refresh recipes based on tags
+    // updateRecipes sans searchTerm pour actualiser les recettes en fonction des tags
     updateRecipes();
   }
 
