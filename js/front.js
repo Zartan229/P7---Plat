@@ -293,7 +293,7 @@ async function displayRecipes() {
         const searchTerm = inputMain.value.toLowerCase();
         if (searchTerm.length >= 3) {
           // Mettre à jour les recettes lorsque le terme de recherche a au moins trois caractères
-          updateRecipes(searchTerm);
+          updateRecipes(sanitizeInput(searchTerm));
         } else {
           // Si le terme de recherche a moins de trois caractères, afficher toutes les recettes
           updateRecipes("");
@@ -320,6 +320,16 @@ async function displayRecipes() {
       console.error("Error fetching or displaying recipes:", error);
     }
   }
+
+  function sanitizeInput(input) {
+    // Check for HTML tags
+    if (/<.*?>/.test(input)) {
+        alert("Du code HTML a été détecter");
+        const inputMain = document.querySelector(".inputMain");
+        inputMain.value = ""; 
+    }
+}
+
 
 displayRecipes();
 
