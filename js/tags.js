@@ -38,5 +38,5 @@ function displayTags() {
     updateRecipes();
   }
 
-  // Export tag array and displayTags function
+
 export { tag, displayTags };
