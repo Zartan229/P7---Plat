@@ -1,59 +1,58 @@
 import { updateRecipes } from './BoucleNatif.js';
 import { tag, displayTags } from './tags.js';
 
-// Function to display unique ingredients in the listIngredient div
+// Fonction pour afficher les ingrédients uniques dans la div listIngredient
 function displayIngredients(filteredRecipes) {
     const listIngredient = document.querySelector(".listIngredient");
   
-    // Clear existing ingredients
+    // Effacer les ingrédients existants
     listIngredient.innerHTML = "";
   
-    // Create a ul element to store the list of ingredients
+    // Créer un élément ul pour stocker la liste des ingrédients
     const ulElement = document.createElement("ul");
   
-    // Create a Set to store unique ingredients
+    // Créer un SET pour stocker les ingrédients uniques
     const uniqueIngredients = new Set();
   
-    // Iterate through displayed recipes to collect unique ingredients
+    // Itérer à travers les recettes affichées pour collecter les ingrédients uniques
     filteredRecipes.forEach((recipe) => {
       recipe.ingredients.forEach((ingredient) => {
         uniqueIngredients.add(ingredient.ingredient.toLowerCase());
       });
     });
   
-    // Convert Set to array and sort alphabetically
+    // Convertir les Set en tableau et le trier par ordre alphabétique
     const sortedIngredients = [...uniqueIngredients].sort();
   
-    // Display ingredients in listIngredient div as list items
+    // Afficher les ingrédients dans la div listIngredient en tant qu'éléments de liste
     sortedIngredients.forEach((ingredient) => {
       const liElement = document.createElement("li");
       liElement.textContent = ingredient;
   
-      // Add a click event listener to each li element
+      // Ajouter un écouteur d'événements de clic à chaque élément li
       liElement.addEventListener('click', function () {
-        // When an li is clicked, add its content to the tag array
+        // Lorsqu'un élément li est cliqué, ajoutez son contenu au tableau de balises
         tag.push(ingredient);
-        console.log("Tags:", tag); // Log tags for testing
         displayTags();
       });
   
       ulElement.appendChild(liElement);
     });
   
-    // Append the ul element to the listIngredient div
+    // Ajouter l'élément ul à la div listIngredient
     listIngredient.appendChild(ulElement);
   
-    // Return sortedIngredients for later use
+    // Retourner sortedIngredients pour une utilisation ultérieure
     return sortedIngredients;
   }
   
-  // Function to filter ingredients based on the search term and currently displayed recipes
+  // Fonction pour filtrer les ingrédients en fonction du terme de recherche et des recettes actuellement affichées
   function filterIngredients(searchTerm, filteredRecipes) {
     const listIngredient = document.querySelector(".listIngredient");
     const ulElement = document.createElement("ul");
     const uniqueIngredients = new Set();
   
-    // Iterate through displayed recipes to collect unique ingredients
+    // Itérer à travers les recettes affichées pour collecter les ingrédients uniques
     filteredRecipes.forEach((recipe) => {
       recipe.ingredients.forEach((ingredient) => {
         if (ingredient.ingredient.toLowerCase().includes(searchTerm)) {
@@ -62,16 +61,15 @@ function displayIngredients(filteredRecipes) {
       });
     });
   
-    // Display filtered ingredients in listIngredient div as list items
+    // Afficher les ingrédients filtrés dans la div listIngredient en tant qu'éléments de liste
     uniqueIngredients.forEach((ingredient) => {
       const liElement = document.createElement("li");
       liElement.textContent = ingredient;
       
-      // Add a click event listener to each filtered ingredient
+      // Ajouter un écouteur d'événements de clic à chaque ingrédient filtré
       liElement.addEventListener('click', function () {
-        // When a filtered ingredient is clicked, add it to the tag array
+        // Lorsqu'un ingrédient filtré est cliqué, ajoutez-le au tableau de balises
         tag.push(ingredient);
-        console.log("Tags:", tag); // Log tags for testing
         displayTags();
       });
   
@@ -82,90 +80,85 @@ function displayIngredients(filteredRecipes) {
     listIngredient.innerHTML = "";
     listIngredient.appendChild(ulElement);
   }
-    
-  // Call the function to initially display all ingredients and store sortedIngredients
-  //const sortedIngredients = displayIngredients();
   
   document.addEventListener('DOMContentLoaded', function () {
-    // Function to toggle dropdown
+    // Fonction pour afficher le menu déroulant
     function toggleDropdown(toggleId, contentClass) {
       var toggleElement = document.getElementById(toggleId);
       var contentElement = document.querySelector('.' + contentClass);
   
       toggleElement.addEventListener('click', function (event) {
-        event.stopPropagation(); // Stop the click event from propagating to the document
-        // Toggle the display of the dropdown content
+        event.stopPropagation(); // Arrêter la propagation de l'événement de clic vers le document
+        // Basculer l'affichage du contenu du menu déroulant
         contentElement.style.display = (contentElement.style.display === 'block') ? 'none' : 'block';
       });
   
       document.addEventListener('click', function (event) {
         if (!contentElement.contains(event.target)) {
-          // Close the dropdown if it's open
+          // Fermer le menu déroulant s'il est ouvert
           contentElement.style.display = 'none';
         }
       });
     }
   
-    // Toggle dropdowns
+    // Inclus les menus déroulants
     toggleDropdown('ingDropdownToggle', 'dropdownIngContent');
     toggleDropdown('ustDropdownToggle', 'dropdownUstContent');
     toggleDropdown('appDropdownToggle', 'dropdownAppContent');
   });
   
-  // Function to display unique ustensils in the listUst div
-  // Function to display unique ustensils in the listUst div
+// Fonction pour afficher les ustensiles uniques dans la div listUst
   function displayUstensils(filteredRecipes) {
     const listUst = document.querySelector(".listUst");
   
-    // Clear existing ustensils
+    // Effacer les ustensiles existants
     listUst.innerHTML = "";
   
-    // Create a ul element to store the list of ustensils
+    // Créer un élément ul pour stocker la liste des ustensiles
     const ulElement = document.createElement("ul");
   
-    // Create a Set to store unique ustensils
+    // Créer un SET pour stocker les ustensiles uniques
     const uniqueUstensils = new Set();
   
-    // Iterate through displayed recipes to collect unique ustensils
+    // Itérer à travers les recettes affichées pour collecter les ustensiles uniques
     filteredRecipes.forEach((recipe) => {
       recipe.ustensils.forEach((utensil) => {
         uniqueUstensils.add(utensil.toLowerCase());
       });
     });
   
-    // Convert Set to array and sort alphabetically
+    // Convertir les Set en tableau et le trier par ordre alphabétique
     const sortedUstensils = [...uniqueUstensils].sort();
   
-      // Display filtered ustensils in listUst div as list items
+      // Afficher les ustensiles filtrés dans la div listUst en tant qu'éléments de liste
     uniqueUstensils.forEach((utensil) => {
       const liElement = document.createElement("li");
       liElement.textContent = utensil;
       
-      // Add a click event listener to each filtered utensil
+      // Ajouter un écouteur d'événements de clic à chaque ustensile filtré
       liElement.addEventListener('click', function () {
-        // When a filtered utensil is clicked, add it to the tag array
+        // Lorsqu'un ustensile filtré est cliqué, ajoutez-le au tableau de balises
         tag.push(utensil);
-        console.log("Tags:", tag); // Log tags for testing
         displayTags();
       });
   
       ulElement.appendChild(liElement);
     });
   
-    // Append the ul element to the listUst div
+    // Ajouter l'élément ul à la div listUst
     listUst.appendChild(ulElement);
   
-    // Return sortedUstensils for later use
+     // Retourner sortedUstensils pour une utilisation ultérieure
     return sortedUstensils;
   }
   
-  // Function to filter ustensils based on the search term and currently displayed recipes
+   // Fonction pour filtrer les ustensiles en fonction du terme de recherche et des recettes actuellement affichées
   function filterUstensils(searchTerm, filteredRecipes) {
     const listUst = document.querySelector(".listUst");
     const ulElement = document.createElement("ul");
     const uniqueUstensils = new Set();
   
-    // Iterate through displayed recipes to collect unique ustensils
+    // Itérer à travers les recettes affichées pour collecter les ustensiles uniques
     filteredRecipes.forEach((recipe) => {
       recipe.ustensils.forEach((utensil) => {
         if (utensil.toLowerCase().includes(searchTerm)) {
@@ -174,16 +167,15 @@ function displayIngredients(filteredRecipes) {
       });
     });
   
-    // Display filtered ustensils in listUst div as list items
+    // Afficher les ustensiles filtrés dans la div listUst en tant qu'éléments de liste
     uniqueUstensils.forEach((utensil) => {
       const liElement = document.createElement("li");
       liElement.textContent = utensil;
       
-      // Add a click event listener to each filtered utensil
+      // Ajouter un écouteur d'événements de clic à chaque ustensile filtré
       liElement.addEventListener('click', function () {
-        // When a filtered utensil is clicked, add it to the tag array
+       // Lorsqu'un ustensile filtré est cliqué, ajoutez-le au tableau de balises
         tag.push(utensil);
-        console.log("Tags:", tag); // Log tags for testing
         displayTags();
       });
   
@@ -194,80 +186,74 @@ function displayIngredients(filteredRecipes) {
     listUst.appendChild(ulElement);
   }
   
-  // Call the function to initially display all ustensils and store sortedUstensils
-  //const sortedUstensils = displayUstensils();
-  
-  // Function to display unique appliances in the listApp div
-  // Function to display unique appliances in the listApp div
+  // Fonction pour afficher les appareils uniques dans la div listApp
   function displayAppliances(filteredRecipes) {
     const listApp = document.querySelector(".listApp");
   
-    // Clear existing appliances
+    // Effacer les appareils existants
     listApp.innerHTML = "";
   
-    // Create a ul element to store the list of appliances
+    // Créer un élément ul pour stocker la liste des appareils
     const ulElement = document.createElement("ul");
   
-    // Create a Set to store unique appliances
+    // Créer un SET pour stocker les appareils uniques
     const uniqueAppliances = new Set();
   
-    // Iterate through displayed recipes to collect unique appliances
+     // Itérer à travers les recettes affichées pour collecter les appareils uniques
     filteredRecipes.forEach((recipe) => {
-      // Check if "appliance" property exists in the recipe
+      // Vérifier si la propriété "appliance" existe dans la recette
       if (recipe.appliance) {
         uniqueAppliances.add(recipe.appliance.toLowerCase());
       }
     });
   
-    // Convert Set to array and sort alphabetically
+    // Convertir les Set en tableau et le trier par ordre alphabétique
     const sortedAppliances = [...uniqueAppliances].sort();
   
-    // Display appliances in listApp div as list items
+    // Afficher les appareils dans la div listApp en tant qu'éléments de liste
     sortedAppliances.forEach((appliance) => {
       const liElement = document.createElement("li");
       liElement.textContent = appliance;
   
-      // Add a click event listener to each li element
+      // Ajouter un écouteur d'événements de clic à chaque élément li
       liElement.addEventListener('click', function () {
-        // When an li is clicked, add its content to the tag array
+        // Lorsqu'un élément li est cliqué, ajoutez son contenu au tableau de balises
         tag.push(appliance);
-        console.log("Tags:", tag); // Log tags for testing
         displayTags();
       });
   
       ulElement.appendChild(liElement);
     });
   
-    // Append the ul element to the listApp div
+    // Ajouter l'élément ul à la div listApp
     listApp.appendChild(ulElement);
   
-    // Return sortedAppliances for later use
+    // Retourner sortedAppliances pour une utilisation ultérieure
     return sortedAppliances;
   }
   
-  // Function to filter appliances based on the search term and currently displayed recipes
+  // Fonction pour filtrer les appareils en fonction du terme de recherche et des recettes actuellement affichées
   function filterAppliances(searchTerm, filteredRecipes) {
     const listApp = document.querySelector(".listApp");
     const ulElement = document.createElement("ul");
     const uniqueAppliances = new Set();
   
-    // Iterate through displayed recipes to collect unique appliances
+     // Itérer à travers les recettes affichées pour collecter les appareils uniques
     filteredRecipes.forEach((recipe) => {
       if (recipe.appliance && recipe.appliance.toLowerCase().includes(searchTerm)) {
         uniqueAppliances.add(recipe.appliance.toLowerCase());
       }
     });
   
-      // Display filtered appliances in listApp div as list items
+      // Afficher les appareils filtrés dans la div listApp en tant qu'éléments de liste
       uniqueAppliances.forEach((appliance) => {
         const liElement = document.createElement("li");
         liElement.textContent = appliance;
         
-        // Add a click event listener to each filtered appliance
+        // Ajouter un écouteur d'événements de clic à chaque appareil filtré
         liElement.addEventListener('click', function () {
-          // When a filtered appliance is clicked, add it to the tag array
+          // Lorsqu'un appareil filtré est cliqué, ajoutez-le au tableau de balises
           tag.push(appliance);
-          console.log("Tags:", tag); // Log tags for testing
           displayTags();
         });
     
@@ -277,7 +263,7 @@ function displayIngredients(filteredRecipes) {
     listApp.innerHTML = "";
     listApp.appendChild(ulElement);
   }
-
+//permet de vider input main
 document.addEventListener("DOMContentLoaded", function() {
     const inputMain = document.querySelector('.inputMain');
     const deleteIcon = document.querySelector('.deleteInput');
@@ -296,24 +282,24 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
-// Function to display recipes
+// Fonction pour afficher les recettes
 async function displayRecipes() {
     try {
-      // Event listener for inputMain changes
+      // Écouteur d'événements pour les modifications de inputMain
       const inputMain = document.querySelector(".inputMain");
   
       inputMain.addEventListener("input", function () {
         const searchTerm = inputMain.value.toLowerCase();
         if (searchTerm.length >= 3) {
-          // Update recipes when the search term has at least three characters
+          // Mettre à jour les recettes lorsque le terme de recherche a au moins trois caractères
           updateRecipes(searchTerm);
         } else {
-          // If the search term has less than three characters, display all recipes
+          // Si le terme de recherche a moins de trois caractères, afficher toutes les recettes
           updateRecipes("");
         }
       });
   
-      // Event listener for form submit
+      // Écouteur d'événements pour la soumission du formulaire
       const searchForm = document.querySelector("form");
       searchForm.addEventListener("submit", function (event) {
         event.preventDefault();
@@ -321,13 +307,13 @@ async function displayRecipes() {
         updateRecipes(searchTerm);
       });
   
-      // Event listener for tag changes
+      // Écouteur d'événements pour les modifications de tag
       const listTag = document.querySelector(".listTag");
       listTag.addEventListener("click", function () {
         updateRecipes();
       });
   
-      // Display all recipes initially
+      // Afficher toutes les recettes initialement
       updateRecipes("");
     } catch (error) {
       console.error("Error fetching or displaying recipes:", error);
