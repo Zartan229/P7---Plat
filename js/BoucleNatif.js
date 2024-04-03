@@ -86,6 +86,13 @@ function updateRecipes(searchTerm = "") {
     const recetteCount = document.querySelector(".recette");
     if (recetteCount) {
       recetteCount.textContent = `${recipesDisplayed} recette${recipesDisplayed !== 1 ? "s" : ""}`;
+      if (recipesDisplayed == 0)
+      {
+        const div = document.createElement("div")
+        div.className = "noRecipe"
+        div.textContent = "Aucune recette de trouver"
+        mainCardFlex.append(div)
+      }
     } else {
       console.error("Element with class 'recette' not found.");
     }
