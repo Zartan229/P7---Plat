@@ -1,105 +1,114 @@
 import recipes from "./recipes.js";
-import { tag } from './tags.js';
-import { createRecipeCard } from './recipeCard.js';
-import { displayIngredients, displayUstensils, displayAppliances, filterIngredients, filterUstensils, filterAppliances } from './front.js';
+import { tag } from "./tags.js";
+import { createRecipeCard } from "./recipeCard.js";
+import { displayIngredients, displayUstensils, displayAppliances, filterIngredients, filterUstensils, filterAppliances } from "./front.js";
 
 const mainCardFlex = document.querySelector(".mainCardFlex");
-const inputMain = document.querySelector('.inputMain');
+const inputMain = document.querySelector(".inputMain");
 let recipesDisplayed = 0;
 let filteredRecipes = [];
 
- // Écouteur d'événements pour les changements de saisie
- const ingInput = document.querySelector(".ingInput");
-  
- // Mettre à jour les écouteurs d'événements pour passer les recettes filtrées
- ingInput.addEventListener("input", function () {
-   const searchTerm = ingInput.value.toLowerCase();
-   filterIngredients(searchTerm, filteredRecipes);
- });
+// Écouteur d'événements pour les changements de saisie
+const ingInput = document.querySelector(".ingInput");
 
+// Mettre à jour les écouteurs d'événements pour passer les recettes filtrées
+ingInput.addEventListener("input", function () {
+  const searchTerm = ingInput.value.toLowerCase();
+  filterIngredients(searchTerm, filteredRecipes);
+});
 
-   // Écouteur d'événements pour les changements de saisie des ustensiles
-   const ustInput = document.querySelector(".ustInput");
-  
-   ustInput.addEventListener("input", function () {
-     const searchTerm = ustInput.value.toLowerCase();
-     filterUstensils(searchTerm, filteredRecipes);
-   });
+// Écouteur d'événements pour les changements de saisie des ustensiles
+const ustInput = document.querySelector(".ustInput");
 
-     // Écouteur d'événements pour les changements de saisie des appareils
-  const appInput = document.querySelector(".appInput");
-  
-  appInput.addEventListener("input", function () {
-    const searchTerm = appInput.value.toLowerCase();
-    filterAppliances(searchTerm, filteredRecipes);
-  });
+ustInput.addEventListener("input", function () {
+  const searchTerm = ustInput.value.toLowerCase();
+  filterUstensils(searchTerm, filteredRecipes);
+});
 
+// Écouteur d'événements pour les changements de saisie des appareils
+const appInput = document.querySelector(".appInput");
 
-  // Fonction pour mettre à jour les recettes en fonction du terme de recherche et des balises sélectionnées
+appInput.addEventListener("input", function () {
+  const searchTerm = appInput.value.toLowerCase();
+  filterAppliances(searchTerm, filteredRecipes);
+});
+
+// Fonction pour mettre à jour les recettes en fonction du terme de recherche et des balises sélectionnées
 function updateRecipes(searchTerm = "") {
-    // Réinitialiser recipesDisplayed lors de la mise à jour des recettes
-    recipesDisplayed = 0;
-  
-    const selectedTags = tag ? tag.map((tag) => tag.toLowerCase()) : [];
-    let searchTermInput = inputMain.value.trim().toLowerCase();
-  
-     // Vérifie si le contenu de inputMain comporte trois caractères ou plus
-    if (searchTermInput.length >= 3) {
-      searchTerm = searchTermInput; // Utilise le contenu de inputMain comme searchTerm
-    }
-  
-    filteredRecipes = [];
-    for (let i = 0; i < recipes.length; i++) {
-      const recipe = recipes[i];
-  
-      const hasSearchTerm = (
-        recipe.name.toLowerCase().includes(searchTerm) ||
-        recipe.description.toLowerCase().includes(searchTerm) ||
-        recipe.ingredients.some((ingredient) => ingredient.ingredient.toLowerCase().includes(searchTerm))
-      );
-  // Vérifie si tout les tags sélectionnées sont présentes dans la recette
-      const hasAllSelectedTags = selectedTags.every(tag => 
+  // Réinitialiser recipesDisplayed lors de la mise à jour des recettes
+  recipesDisplayed = 0;
+
+  const selectedTags = tag ? tag.map((tag) => tag.toLowerCase()) : [];
+  let searchTermInput = inputMain.value.trim().toLowerCase();
+
+  // Vérifie si le contenu de inputMain comporte trois caractères ou plus
+  if (searchTermInput.length >= 3) {
+    searchTerm = searchTermInput; // Utilise le contenu de inputMain comme searchTerm
+  }
+
+  filteredRecipes = [];
+  for (let i = 0; i < recipes.length; i++) {
+    const recipe = recipes[i];
+
+    const hasSearchTerm =
+      recipe.name.toLowerCase().includes(searchTerm) ||
+      recipe.description.toLowerCase().includes(searchTerm) ||
+      // Fonction fléchée pour parcourirs les ingrédients
+      (() => {
+        // Parcourt tous les ingrédients de la recette
+        for (let i = 0; i < recipe.ingredients.length; i++) {
+          // Vérifie si le searchTerm est présent dans l'ingrédient actuel (en minuscules)
+          if (recipe.ingredients[i].ingredient.toLowerCase().includes(searchTerm)) {
+            // Si le searchTerm est trouvé dans un ingrédient, retourne true
+            return true;
+          }
+        }
+        // Si le searchTerm n'est trouvé dans aucun ingrédient, retourne false
+        return false;
+      })();
+    // Vérifie si tout les tags sélectionnées sont présentes dans la recette
+    const hasAllSelectedTags = selectedTags.every(
+      (tag) =>
         recipe.ingredients.some((ingredient) => ingredient.ingredient.toLowerCase() === tag) ||
         recipe.ustensils.some((utensil) => utensil.toLowerCase() === tag) ||
         (recipe.appliance && recipe.appliance.toLowerCase() === tag)
-      );
-  
-      if (hasSearchTerm && hasAllSelectedTags) {
-        filteredRecipes.push(recipe);
-      }
+    );
+
+    if (hasSearchTerm && hasAllSelectedTags) {
+      filteredRecipes.push(recipe);
     }
-  
-    if (!mainCardFlex) {
-      console.error("Element with class 'mainCardFlex' not found.");
-      return;
-    }
-  
-    mainCardFlex.innerHTML = ""; // Supprime les recettes
-  
-    for (let i = 0; i < filteredRecipes.length; i++) {
-      const recipe = filteredRecipes[i];
-      const card = createRecipeCard(recipe);
-      mainCardFlex.appendChild(card);
-      recipesDisplayed++;
-    }
-  
-    const recetteCount = document.querySelector(".recette");
-    if (recetteCount) {
-      recetteCount.textContent = `${recipesDisplayed} recette${recipesDisplayed !== 1 ? "s" : ""}`;
-      if (recipesDisplayed == 0)
-      {
-        const div = document.createElement("div")
-        div.className = "noRecipe"
-        div.textContent = "Aucune recette de trouver"
-        mainCardFlex.append(div)
-      }
-    } else {
-      console.error("Element with class 'recette' not found.");
-    }
-    displayIngredients(filteredRecipes);
-    displayUstensils(filteredRecipes);
-    displayAppliances(filteredRecipes);
   }
-  
- // Appelle la fonction pour afficher les recettes
-  export { updateRecipes };
+
+  if (!mainCardFlex) {
+    console.error("Element with class 'mainCardFlex' not found.");
+    return;
+  }
+
+  mainCardFlex.innerHTML = ""; // Supprime les recettes
+
+  for (let i = 0; i < filteredRecipes.length; i++) {
+    const recipe = filteredRecipes[i];
+    const card = createRecipeCard(recipe);
+    mainCardFlex.appendChild(card);
+    recipesDisplayed++;
+  }
+
+  const recetteCount = document.querySelector(".recette");
+  if (recetteCount) {
+    recetteCount.textContent = `${recipesDisplayed} recette${recipesDisplayed !== 1 ? "s" : ""}`;
+    if (recipesDisplayed == 0) {
+      const div = document.createElement("div");
+      div.className = "noRecipe";
+      div.textContent = "Aucune recette de trouver";
+      mainCardFlex.append(div);
+    }
+  } else {
+    console.error("Element with class 'recette' not found.");
+  }
+  displayIngredients(filteredRecipes);
+  displayUstensils(filteredRecipes);
+  displayAppliances(filteredRecipes);
+}
+
+// Appelle la fonction pour afficher les recettes
+export { updateRecipes };
